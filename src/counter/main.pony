@@ -8,13 +8,15 @@ use "collections"
 
 actor Main
   new create(env: Env) =>
-    for n in Range[U32](0,1000) do
-      let counter = Counter(n)
+    for n in Range[U32](0,100) do
       let show = Show(env)
-      for m in Range[U32](0,1000) do
-        counter.increment()
+      for m in Range[U32](0,100) do
+        let counter = Counter(n + m)
+        for x in Range[U32](0,1000) do
+          counter.increment()
+        end
+        counter.get(show)
       end
-      counter.get(show)
     end
 
 actor Show
