@@ -1,5 +1,11 @@
 use "collections"
 
+// Playing around with concurrent execution with actors
+// Discovered that passing back to Main to show would mean
+// the behaviors were serialised. Creating a Show instance
+// for each counter allows the get->show step to finish
+// without coordination.
+
 actor Main
   new create(env: Env) =>
     for n in Range[U32](0,1000) do
@@ -10,7 +16,6 @@ actor Main
       end
       counter.get(show)
     end
-
 
 actor Show
   var _env: Env
@@ -32,5 +37,3 @@ actor Counter
 
   be get(show: Show) =>
     show.show(_id, _count)
-
-
