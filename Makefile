@@ -1,7 +1,7 @@
 source_dirs := $(wildcard src/*)
 build_dirs := $(source_dirs:src/%=build/%)
 
-.PHONY: all
+.PHONY: all clean
 
 all: $(build_dirs)
 
